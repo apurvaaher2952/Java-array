@@ -1,0 +1,52 @@
+def max_sum_path(arr1, arr2):
+    # Get the lengths of the input arrays
+    m = len(arr1)
+    n = len(arr2)
+
+    # Initialize variables to track current indices and sums
+    i = 0
+    j = 0
+    result = 0
+    sum1 = 0
+    sum2 = 0
+
+    # Loop until we reach the end of either array
+    while i < m and j < n:
+        # If current element of arr1 is smaller, add it to sum1
+        if arr1[i] < arr2[j]:
+            sum1 += arr1[i]
+            i += 1
+        # If current element of arr2 is smaller, add it to sum2
+        elif arr1[i] > arr2[j]:
+            sum2 += arr2[j]
+            j += 1
+        # If elements are equal (common element),
+        # calculate maximum sum so far and add it to result
+        else:
+            result += max(sum1, sum2) + arr1[i]
+            # Reset sum1 and sum2
+            sum1 = 0
+            sum2 = 0
+            i += 1
+            j += 1
+
+    # Add remaining elements of arr1 to sum1
+    while i < m:
+        sum1 += arr1[i]
+        i += 1
+
+    # Add remaining elements of arr2 to sum2
+    while j < n:
+        sum2 += arr2[j]
+        j += 1
+
+    # Add the maximum of sum1 and sum2 to result
+    result += max(sum1, sum2)
+
+    # Return the final result
+    return result
+
+# Example usage
+arr1 = [2, 3, 7, 10, 12]
+arr2 = [1, 5, 7, 8]
+print(max_sum_path(arr1, arr2))  # Output: 35 (2 + 3 + 7 + 10 + 12 + 8)
