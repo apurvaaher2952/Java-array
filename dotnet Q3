@@ -1,0 +1,31 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class NonRepeatingCharacters {
+    public static void main(String[] args) {
+        String str = "Hello, World!";
+        Map<Character, Integer> charCountMap = new HashMap<>();
+
+        // Convert the string to lowercase to ignore case
+        str = str.toLowerCase();
+
+        // Remove spaces and punctuation marks
+        str = str.replaceAll("[^a-zA-Z]", "");
+
+        // Convert the string to a character array
+        char[] charArray = str.toCharArray();
+
+        // Count the occurrences of each character
+        for (char c : charArray) {
+            charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+        }
+
+        // Print non-repeating characters
+        System.out.println("Non-repeating characters in the string:");
+        for (Map.Entry<Character, Integer> entry : charCountMap.entrySet()) {
+            if (entry.getValue() == 1) {
+                System.out.println(entry.getKey());
+            }
+        }
+    }
+}
