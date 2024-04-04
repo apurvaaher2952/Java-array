@@ -1,0 +1,32 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ArrayRanker {
+    public static void main(String[] args) {
+        int[] arr = {10, 8, 15, 12, 6, 20, 1};
+
+        // Create a copy of the array and sort it
+        int[] sortedArr = arr.clone();
+        Arrays.sort(sortedArr);
+
+        // Create a map to store the rank of each element
+        Map<Integer, Integer> rankMap = new HashMap<>();
+        int rank = 1;
+        for (int num : sortedArr) {
+            if (!rankMap.containsKey(num)) {
+                rankMap.put(num, rank);
+                rank++;
+            }
+        }
+
+        // Replace each array element by its corresponding rank
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = rankMap.get(arr[i]);
+        }
+
+        // Print the updated array
+        System.out.println("Input: " + Arrays.toString(sortedArr));
+        System.out.println("Output: " + Arrays.toString(arr));
+    }
+}
