@@ -1,0 +1,37 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class LongestSubstring {
+    public static int lengthOfLongestSubstring(String s) {
+        // Initialize variables
+        int n = s.length();
+        Set<Character> set = new HashSet<>();
+        int ans = 0, i = 0, j = 0;
+
+        // Use two pointers i and j to create a sliding window
+        while (i < n && j < n) {
+            // If the character at index j is not in the set, add it to the set and expand the window
+            if (!set.contains(s.charAt(j))) {
+                set.add(s.charAt(j++));
+                ans = Math.max(ans, j - i); // Update the length of the longest substring
+            } else {
+                // If the character at index j is already in the set, remove the character at index i
+                set.remove(s.charAt(i++));
+            }
+        }
+
+        return ans; // Return the length of the longest substring
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        String s1 = "abcabcbb";
+        String s2 = "bbbbb";
+        String s3 = "pwwkew";
+
+        // Print the length of the longest substring for each test case
+        System.out.println("Length of longest substring in \"" + s1 + "\": " + lengthOfLongestSubstring(s1));
+        System.out.println("Length of longest substring in \"" + s2 + "\": " + lengthOfLongestSubstring(s2));
+        System.out.println("Length of longest substring in \"" + s3 + "\": " + lengthOfLongestSubstring(s3));
+    }
+}
